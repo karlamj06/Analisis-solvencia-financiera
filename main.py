@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import openai
 
 # Cargar los datos desde el repositorio de GitHub
 url = "https://raw.githubusercontent.com/karlamj06/Analisis-solvencia-financiera/refs/heads/main/Datos_proyecto_limpio.csv"
