@@ -71,3 +71,31 @@ st.write("Lo anterior está en sintonía con el ratio de deuda a patrimonio, el 
 st.write("Sin embargo, la cobertura de gastos financieros es mayor a 1, lo cual indica que esto puede representar un riesgo para la empresa ya que el ratio de deuda a patrimonio es mayor a 1, significa que las deudas de una empresa o persona son mayores que el valor de sus activos. Esto puede ser un riesgo, ya que la empresa depende en gran medida de financiamiento externo.")
 st.write("Si bien la mpresa presenta indicadores a lo que se debería prestar especial atención, podemos visualizar que el ratio de deuda total a activos es menor a 1, lo que nos indica que los activos no están en mayor proporción financiados con deuda.")
 st.write("Finalmente, el ratio de rentabilidad de la empresa es menor a 1, lo que nos indica que la empresa no es viable. Para ello se aconsejaría llevar a cabo una junta con los accionistas para tomar una decisión y no afectar a las partes interesadas en caso de que la empresa quiebre")
+
+# Instanciar el cliente de OpenAI
+openai_api_key = st.secrets["OPENAI_API_KEY"]
+client = openai.OpenAI(api_key=openai_api_key)
+
+def obtener_respuesta(prompt):
+  response = client.chat.completions.create(
+      model="gpt-4o-mini",  # Ajusta el modelo según lo que necesites
+      messages=[
+          {"role": "system", "content": """
+          Eres un analista que es experto para determinarla solvencia de una entidad
+          entonces vas a responder todo para ver si cada empresa tiene los recursos
+          suficientes para hacer frente a sus obligaciones. Contesta en un máximo de 50
+          palabras.
+          """}, #Solo podemos personalizar la parte de content
+          {"role": "user", "content": prompt}
+      ]
+  )
+  output = response.choices[0].message.content
+  return output
+
+prompt_user= st.text_area("Ingresa tu pregunta: ")
+
+# Obtener la respuesta del modelo
+output_modelo = obtener_respuesta(prompt_user)
+
+# Mostrar la respuesta del modelo
+st.write(output_modelo)
