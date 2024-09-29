@@ -72,6 +72,8 @@ st.write("Sin embargo, la cobertura de gastos financieros es mayor a 1, lo cual 
 st.write("Si bien la mpresa presenta indicadores a lo que se debería prestar especial atención, podemos visualizar que el ratio de deuda total a activos es menor a 1, lo que nos indica que los activos no están en mayor proporción financiados con deuda.")
 st.write("Finalmente, el ratio de rentabilidad de la empresa es menor a 1, lo que nos indica que la empresa no es viable. Para ello se aconsejaría llevar a cabo una junta con los accionistas para tomar una decisión y no afectar a las partes interesadas en caso de que la empresa quiebre")
 
+#openai_api_key ='URL API KEY'
+
 # Instanciar el cliente de OpenAI
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 client = openai.OpenAI(api_key=openai_api_key)
